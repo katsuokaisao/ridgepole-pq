@@ -9,14 +9,14 @@ tasks:
   rp-dry-run:
     cmds:
       - docker-compose -f docker/docker-compose.yml up -d --no-deps db
-      - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh wait.sh
+      - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh shell/wait.sh
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole bundle exec ridgepole -c config/database.yml -E development --apply -f db/Schemafile --dry-run
     env:
       RAILS_ENV: development
   rp-apply:
     cmds:
       - docker-compose -f docker/docker-compose.yml up -d --no-deps db
-      - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh wait.sh
+      - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh shell/wait.sh
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole bundle exec ridgepole -c config/database.yml -E development --apply -f db/Schemafile
     env:
       RAILS_ENV: development
