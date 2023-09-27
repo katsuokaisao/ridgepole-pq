@@ -1,0 +1,34 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activemodel (7.0.8)
+      activesupport (= 7.0.8)
+    activerecord (7.0.8)
+      activemodel (= 7.0.8)
+      activesupport (= 7.0.8)
+    activesupport (7.0.8)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      i18n (>= 1.6, < 2)
+      minitest (>= 5.1)
+      tzinfo (~> 2.0)
+    concurrent-ruby (1.2.2)
+    diffy (3.4.2)
+    i18n (1.14.1)
+      concurrent-ruby (~> 1.0)
+    minitest (5.20.0)
+    pg (1.5.4)
+    ridgepole (1.2.1)
+      activerecord (>= 5.1, < 7.1)
+      diffy
+    tzinfo (2.0.6)
+      concurrent-ruby (~> 1.0)
+
+PLATFORMS
+  aarch64-linux
+
+DEPENDENCIES
+  pg
+  ridgepole
+
+BUNDLED WITH
+   2.4.10

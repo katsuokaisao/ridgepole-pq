@@ -1,0 +1,22 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  rp-build:
+    cmds:
+      - docker-compose build
+  rp-dry-run:
+    cmds:
+      - docker-compose up -d --no-deps db
+      - docker-compose run --rm ridgepole sh wait.sh
+      - docker-compose run --rm ridgepole bundle exec ridgepole -c config/database.yml -E development --dry-run -f db/Schemafile
+    env:
+      RAILS_ENV: development
+  rp-apply:
+    cmds:
+      - docker-compose up -d --no-deps db
+      - docker-compose run --rm ridgepole sh wait.sh
+      - docker-compose run --rm ridgepole bundle exec ridgepole -c config/database.yml -E development --apply -f db/Schemafile
+    env:
+      RAILS_ENV: development

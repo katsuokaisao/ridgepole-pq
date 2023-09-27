@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+  ridgepole:
+    build: .
+    environment:
+      DB_HOST: db
+      DB_USER: username
+      DB_PASSWORD: password
+      DB_DATABSE: mydatabase
+    ports:
+      - "7777:7777"
+    volumes:
+      - .:/app/ridgepole
+    depends_on:
+      - db
