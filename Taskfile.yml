@@ -3,26 +3,29 @@
 version: '3'
 
 tasks:
-  rp-build:
+  up:
+    cmds:
+      - docker-compose -f docker/docker-compose.yml up -d
+  build:
     cmds:
       - docker-compose -f docker/docker-compose.yml build
+  build-no-cache:
+    cmds:
+      - docker-compose -f docker/docker-compose.yml build --no-cache
   rp-dry-run:
     cmds:
-      - docker-compose -f docker/docker-compose.yml up -d --no-deps db
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh shell/wait-for-startup.sh
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole bundle exec ridgepole -c config/database.yml -E development --apply -f db/Schemafile --dry-run
     env:
       RAILS_ENV: development
   rp-apply:
     cmds:
-      - docker-compose -f docker/docker-compose.yml up -d --no-deps db
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh shell/wait-for-startup.sh
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole bundle exec ridgepole -c config/database.yml -E development --apply -f db/Schemafile
     env:
       RAILS_ENV: development
   insert-seed:
     cmds:
-      - docker-compose -f docker/docker-compose.yml up -d --no-deps db
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh shell/wait-for-startup.sh
       - docker-compose -f docker/docker-compose.yml run --rm ridgepole sh shell/insert-seed.sh
     env:
